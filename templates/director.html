@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ director.name }} - Director Spotlight</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🎬 {{ director.name }}</h1>
+    <p><strong>DOB:</strong> {{ director.dob }}</p>
+    <p><strong>Nationality:</strong> {{ director.nationality }}</p>
+    <p><strong>Contact:</strong> {{ director.contact_no }}</p>
+
+    <h2>📽️ Movies Directed</h2>
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-card">
+            <img src="{{ url_for('static', filename='posters/' ~ movie.movie_id ~ '.jpg') }}">
+            <h3>{{ movie.title }}</h3>
+            <p>Release: {{ movie.release_date }}</p>
+            <p>⭐ {{ movie.rating }}</p>
+            <a href="{{ url_for('movie_detail', movie_id=movie.movie_id) }}">View</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>🏆 Awards</h2>
+    {% if awards %}
+    <ul>
+        {% for award in awards %}
+        <li>{{ award.name }} ({{ award.year }})</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No awards listed.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+</div>
+</body>
+</html>

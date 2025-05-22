@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ actor.name }} - Actor Awards</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🎭 {{ actor.name }}</h1>
+    <p><strong>DOB:</strong> {{ actor.dob }}</p>
+    <p><strong>Nationality:</strong> {{ actor.nationality }}</p>
+    <p><strong>Bio:</strong> {{ actor.biography }}</p>
+
+    <h2>🏆 Awards</h2>
+    {% if awards %}
+    <ul>
+        {% for award in awards %}
+        <li>{{ award.name }} ({{ award.year }})</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No awards listed for this actor.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+</div>
+</body>
+</html>

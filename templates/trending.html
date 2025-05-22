@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trending Movies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🔥 Trending Movies</h1>
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="movie-card">
+            <img src="{{ url_for('static', filename='posters/' ~ movie.movie_id ~ '.jpg') }}">
+            <h3>{{ movie.title }}</h3>
+            <p>Revenue: ${{ "{:,}".format(movie.total_revenue) }}</p>
+            <p>Avg Rating: ⭐ {{ movie.avg_rating }}</p>
+            <a href="{{ url_for('movie_detail', movie_id=movie.movie_id) }}">View Details</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

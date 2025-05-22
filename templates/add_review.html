@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>MovieDB</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+    
+<head>
+    <title>Add Review</title>
+</head>
+<body>
+    <h1>Add a Review</h1>
+    <form action="{{ url_for('add_review', movie_id=movie_id) }}" method="post">
+        <label for="user_id">User ID:</label><br>
+        <input type="number" name="user_id" required><br><br>
+
+        <label for="comment">Review:</label><br>
+        <textarea name="comment" rows="4" cols="50" required></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p><a href="{{ url_for('movie_details', movie_id=movie_id) }}">← Back to Movie</a></p>
+</body>
+</html>

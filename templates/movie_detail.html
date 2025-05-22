@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    
+        <!-- Poster -->
+        <!-- Cast -->
+        <!-- Reviews -->
+        <!-- Add Review Form -->
+    
+    
+<head>
+        <title>MovieDB</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+    
+<head>
+    <title>{{ movie.title }} - Details</title>
+</head>
+<body>
+    <h1>{{ movie.title }}</h1>
+    <div class="poster-wrapper">
+        <img class="movie-detail-poster" src="{{ url_for('static', filename='posters/' ~ movie.movie_id ~ '.jpg') }}" alt="Movie Poster">
+
+    </div>
+    <div class="container">
+    <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+    <p><strong>Duration:</strong> {{ movie.duration }} min</p>
+    <p><strong>Rating:</strong> {{ movie.rating }}</p>
+    <p><strong>Genres:</strong>
+  {% for genre in genres %}
+    <span class="genre-tag">{{ genre }}</span>
+  {% endfor %}
+</p>
+
+    <p><strong>Language:</strong> {{ movie.language }}</p>
+
+    <h3>🎭 Cast</h3>
+    <div class="cast-list">
+      <ul>
+  {% for actor in actors %}
+    <li>
+      <a href="{{ url_for('actor_page', actor_id=actor.actor_id) }}">
+        {{ actor.name }}
+      </a> as {{ actor.character_name }}
+    </li>
+  {% endfor %}
+</ul>
+
+    </div>
+    <h3>📝 Reviews</h3>
+    <div class="review-list">
+      {% if reviews %}
+        {% for review in reviews %}
+          <div class="review-card">
+            <p><strong>{{ review.name }}</strong></p>
+            <p>"{{ review.comment }}"</p>
+            <p>⭐ {{ review.rating }}/10</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No reviews yet.</p>
+      {% endif %}
+    </div>
+    
+    <h3>Add Your Review</h3>
+    <form method="post" action="{{ url_for('add_review') }}" class="review-form">
+        <input type="hidden" name="movie_id" value="{{ movie.movie_id }}">
+        <label>Rating (1-10):</label>
+        <input type="number" name="rating" min="1" max="10" required><br><br>
+        <label>Comment:</label><br>
+        <textarea name="comment" required></textarea><br><br>
+        <button type="submit">Submit Review</button>
+    </form>
+
+
+    <p><a href="{{ url_for('director_page', director_id=movie.director_id) }}">👨‍🎬 View Director Profile</a></p>
+
+    <p><a href="{{ url_for('writer_page', writer_id=movie.script_id) }}">✍️ View Writer Profile</a></p>
+
+    <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+
+    <h3>🏆 Awards</h3>
+{% if awards %}
+<ul>
+    {% for award in awards %}
+    <li>{{ award.name }} ({{ award.year }})</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No awards listed for this movie.</p>
+{% endif %}
+
+</body>
+</div>
+</html>

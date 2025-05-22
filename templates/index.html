@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>MovieDB</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+    
+<head>
+    <title>Movie List</title>
+</head>
+<body>
+    <h1>Movie Database</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <a href="{{ url_for('movie_details', movie_id=movie.movie_id) }}">
+                    {{ movie.title }} ({{ movie.release_date.year }})
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+<p>Logged in as {{ session['user_name'] }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+
+

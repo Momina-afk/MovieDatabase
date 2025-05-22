@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>MovieDB</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+    
+<head>
+    <title>Dashboard - MovieDB</title>
+</head>
+<body>
+    <h2>Welcome, {{ user.name }}</h2>
+    <form method="get">
+        <input type="text" name="search" placeholder="Search movie...">
+        <button type="submit">Search</button>
+    </form>
+    <div class="movie-list">
+    {% for movie in movies %}
+    <div class="movie-item">
+        <img class="movie-poster" src="{{ url_for('static', filename='posters/' ~ movie.movie_id ~ '.jpg') }}" alt="Poster">
+        <div class="movie-info">
+            <a href="{{ url_for('movie_detail', movie_id=movie.movie_id) }}">
+                <h3>{{ movie.title }}</h3>
+            </a>
+            <p>Release Date: {{ movie.release_date }}</p>
+            <p>⭐ Rating: {{ movie.rating }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+</body>
+<a href="{{ url_for('trending') }}">🔥 Trending</a>
+<a href="{{ url_for('recommendations') }}">🎯 Recommendations</a>
+<a href="{{ url_for('platform_page', platform_id=1) }}">Netflix</a>
+<a href="{{ url_for('platform_page', platform_id=2) }}">Amazon Prime</a>
+<a href="{{ url_for('platform_page', platform_id=3) }}">Disney+</a>
+
+</html>

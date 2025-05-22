@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>MovieDB</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+    
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <ul>
+        {% for movie in results %}
+        <li><a href="/movie/{{ movie.movie_id }}">{{ movie.title }} ({{ movie.release_date }})</a></li>
+        {% endfor %}
+    </ul>
+    <p><a href="/">Back to All Movies</a></p>
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ writer.name }} - Writer Spotlight</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🖋️ {{ writer.name }}</h1>
+    <p><strong>DOB:</strong> {{ writer.dob }}</p>
+    <p><strong>Nationality:</strong> {{ writer.nationality }}</p>
+    <p><strong>Contact:</strong> {{ writer.contact_no }}</p>
+
+<h2>📜 Scripts & Collaborations</h2>
+{% if scripts %}
+<div class="script-list">
+    {% for s in scripts %}
+    <div class="script-card">
+        <h3>{{ s.title }}</h3>
+        <p><strong>Language:</strong> {{ s.language }}</p>
+        {% if s.movie_title %}
+            <p>🎬 Movie: <a href="{{ url_for('movie_detail', movie_id=s.movie_id) }}">{{ s.movie_title }}</a></p>
+            <p>🎬 Director: {{ s.director_name }}</p>
+        {% else %}
+            <p>🚧 No movie adaptation yet</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No scripts found for this writer.</p>
+{% endif %}
+
+
+    <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+</div>
+</body>
+</html>
