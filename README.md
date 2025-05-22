@@ -51,7 +51,12 @@ This project uses raw SQL + Flask + Jinja2 to build smart logic:
 
 bash
 git clone https://github.com/Momina-afk/MovieDatabase.git
-cd movie-db-app
+
+then unzip the movie_db_app
+
+bash
+cd movie_db_app
+
 
 🗃️ Step 2: Setup the MySQL Database
 SOURCE schema.sql;
